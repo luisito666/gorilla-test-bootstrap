@@ -1,0 +1,24 @@
+
+
+
+bootstrap:
+  stacks:
+    cluster:
+      enabled: true
+
+  applications:
+    cert-manager:
+      enabled: true      
+      namespace: operations
+      stacks: ["cluster"]
+      orgname: luisito666
+      repo: bootstrap
+      branch: main
+
+    ingress-nginx:
+      enabled: true
+      namespace: operations
+      stacks: ["cluster"]
+      orgname: luisito666
+      repo: bootstrap
+      branch: main

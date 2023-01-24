@@ -1,0 +1,37 @@
+{{- range $name, $app := $.Values.applications }}
+{{- $enabled := false -}}
+{{- range $_, $name := $app.stacks -}}
+  {{- $stack := get $.Values.stacks $name -}}
+  {{- if $stack.enabled -}}
+    {{- $enabled = true -}}
+  {{- end -}}
+  {{- end -}}
+  {{- if and $enabled $app.enabled }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $name }}
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: {{ $app.namespace }}
+    server: {{ $.Values.destination.server }}
+  project: default
+  source:
+    path: charts/{{ $name }}
+    repoURL: git@github.com:{{ $app.orgname }}/{{ $app.repo }}.git
+    targetRevision: {{ $app.branch }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - RespectIgnoreDifferences=true
+  {{- end }}
+{{- end }}

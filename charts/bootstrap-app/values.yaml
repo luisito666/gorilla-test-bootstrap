@@ -1,0 +1,13 @@
+bootstrap:
+  stacks:
+    apps:
+      enabled: true
+
+  applications:
+    mt2-web-saas:
+      enabled: true
+      stacks: ["apps"]
+      namespace: api
+      orgname: luisito666
+      repo: Mt2-Web-SAAS
+      branch: main

@@ -1,0 +1,21 @@
+
+stacks:
+  foo:
+    enabled: false
+  bar:
+    enabled: false
+
+defaultBranch: main
+
+destination:
+  server: https://kubernetes.default.svc
+  namespace: argocd
+
+applications:
+  example-app:
+    enabled: true
+    namespace: default
+    repo: bootstrap
+    branch: main
+    orgname: luisito666
+    stacks: ["foo", "bar"]
