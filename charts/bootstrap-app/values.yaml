@@ -4,10 +4,10 @@ bootstrap:
       enabled: true
 
   applications:
-    mt2-web-saas:
+    timeoff:
       enabled: true
       stacks: ["apps"]
-      namespace: api
+      namespace: app
       orgname: luisito666
-      repo: Mt2-Web-SAAS
-      branch: main
+      repo: timeoff-management-application
+      branch: master
