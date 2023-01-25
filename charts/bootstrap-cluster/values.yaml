@@ -12,7 +12,7 @@ bootstrap:
       namespace: operations
       stacks: ["cluster"]
       orgname: luisito666
-      repo: bootstrap
+      repo:  gorilla-test-bootstrap
       branch: main
 
     ingress-nginx:
@@ -20,5 +20,5 @@ bootstrap:
       namespace: operations
       stacks: ["cluster"]
       orgname: luisito666
-      repo: bootstrap
+      repo:  gorilla-test-bootstrap
       branch: main

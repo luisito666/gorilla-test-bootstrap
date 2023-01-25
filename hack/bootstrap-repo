@@ -1,0 +1,8 @@
+#!/bin/bash -e
+
+
+for repo in gorilla-test-bootstrap timeoff-management-application; do
+    argocd repo add git@github.com:luisito666/$repo.git --ssh-private-key-path ~/.ssh/id_rsa
+done
+
+
