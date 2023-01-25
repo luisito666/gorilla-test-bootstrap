@@ -12,7 +12,7 @@ spec:
   project: default
   source:
     path: charts/bootstrap-cluster
-    repoURL: git@github.com:Mt2-SAAS/bootstrap.git
+    repoURL: git@github.com:luisito666/gorilla-test-bootstrap.git
     targetRevision: main
   syncPolicy:
     automated:
