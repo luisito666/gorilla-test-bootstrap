@@ -1,0 +1,34 @@
+#!/bin/bash -e
+
+
+DIR="$(dirname ${BASH_SOURCE[0]})"
+
+function cleanup() {
+  echo "Limpiando"
+}
+# trap cleanup EXIT
+
+UPDATE_CHART=true COMPONENT=argocd \
+  ${DIR}/deploy-chart -f bootstrap.yaml
+
+
+bcrypt_password='$2y$10$501SumNmb8jZ9utjTi4e3uixp1Z3FRbzxPRSsUbncfw3X5IXqb03q'
+
+argocd_ssh_key_file='/home/luisito/.ssh/id_rsa'
+
+kubectl -n argocd patch secret argocd-secret \
+-p "{\"stringData\": {
+  \"admin.password\": \"$bcrypt_password\",
+  \"admin.passwordMtime\": \"'$(date +%FT%T%Z)'\"
+}}"
+
+kubectl config set-context --namespace argocd --current
+argocd login --core
+
+if [[ "$ENVIRONMENT" == "local" ]]; then
+  ssh-keyscan github.com | argocd cert add-ssh --batch
+fi
+
+argocd repocreds add \
+  --upsert "ssh://git@github.com:luisito666/" \
+  --ssh-private-key-path $argocd_ssh_key_file

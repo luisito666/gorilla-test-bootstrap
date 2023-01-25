@@ -1,0 +1,9 @@
+apiVersion: v2
+name: argocd
+description: BalkanID learning installation of argocd
+type: application
+version: 0.2.0
+dependencies:
+  - name: argo-cd
+    repository: https://argoproj.github.io/argo-helm
+    version: "5.19"

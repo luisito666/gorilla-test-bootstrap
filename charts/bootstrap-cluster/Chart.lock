@@ -1,0 +1,6 @@
+dependencies:
+- name: bootstrap
+  repository: file://../bootstrap
+  version: 0.1.0
+digest: sha256:6c006024a5b48fd56e512454b5ba128611ec11f26890d53e8a517a68f71f4292
+generated: "2023-01-24T18:51:17.443226948-05:00"

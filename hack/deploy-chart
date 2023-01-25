@@ -1,0 +1,22 @@
+#!/bin/bash -e
+
+DIR="$(dirname ${BASH_SOURCE[0]})"
+
+UPDATE_CHART=${UPDATE_CHART:-false}
+CHART_DIR="charts/${COMPONENT}"
+RELEASE=${COMPONENT}
+NS=${NS:-$COMPONENT}
+DEPLOY_OPTIONS=${DEPLOY_OPTIONS}
+cd $CHART_DIR
+if [ "${UPDATE_CHART}" != "false" ]; then 
+  helm dependency update
+fi
+
+helm upgrade --install \
+  --create-namespace \
+  --wait \
+  --timeout 300m \
+  ${DEPLOY_OPTIONS} \
+  -n ${NS} \
+  ${RELEASE} ./ \
+  $@
